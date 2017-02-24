@@ -1,6 +1,7 @@
 package com.elegantweather.com;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.elegantweather.com.db.City;
 import com.elegantweather.com.db.County;
 import com.elegantweather.com.db.Province;
+import com.elegantweather.com.gson.Weather;
 import com.elegantweather.com.util.HttpUtil;
 import com.elegantweather.com.util.Utility;
 
@@ -96,6 +98,13 @@ public class ChooseAreaFragment extends Fragment {
                 }else if (currentLevel==Level_CITY){
                     selectedCity=cityList.get(position);
                     queryCounties();
+                // 如果当前级别是县就启动天气的Activity，显示数据
+                }else if (currentLevel==LEVEL_COUNTY){
+                    String weatherId=countyList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
 
             }

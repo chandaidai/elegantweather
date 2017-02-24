@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.elegantweather.com.db.City;
 import com.elegantweather.com.db.County;
 import com.elegantweather.com.db.Province;
+import com.elegantweather.com.gson.Weather;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -102,7 +104,7 @@ public class Utility {
                     //设置县的名字数据
                     county.setCountyName(countyObject.getString("name"));
                     //设置所在市的id
-                    county.setCityID(cityId);
+                    county.setCityId(cityId);
                     //设置对应天气的ID
                     county.setWeatherId(countyObject.getString("weather_id"));
                     //设置到数据库中
@@ -119,4 +121,25 @@ public class Utility {
     }
 
 
+    /*
+    * 定义一个方法把返回的JSON数据解析成Weather的对象实体类
+    *
+    * */
+
+    public static Weather handleWeatherResponse(String response){
+        try {
+            //通过 JSONObject和JSONArray 解析出返回数据的主体名字叫HeWeather
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather");
+            //接收主体字符串
+            String weatherContent=jsonArray.getJSONObject(0).toString();
+            //解析内容 并且通过fromJson 方法将JSON 转换成Weather对象，返回
+           return new Gson().fromJson(weatherContent,Weather.class);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 }
