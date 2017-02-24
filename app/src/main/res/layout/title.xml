@@ -2,6 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize">
+
+    <Button
+        android:id="@+id/nav_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_home"
+        />
     <TextView
         android:id="@+id/title_city"
         android:layout_width="wrap_content"
@@ -9,8 +19,7 @@
         android:layout_centerInParent="true"
         android:textSize="20sp"
         android:textColor="#fff"
-        android:text="城市"
-        />
+        android:text="城市" />
     <TextView
         android:id="@+id/title_update_time"
         android:layout_width="wrap_content"
@@ -20,7 +29,6 @@
         android:layout_centerVertical="true"
         android:textSize="16sp"
         android:textColor="#fff"
-        android:text="时间"
-        />
+        android:text="时间" />
 
 </RelativeLayout>
