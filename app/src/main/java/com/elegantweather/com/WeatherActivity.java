@@ -1,5 +1,6 @@
 package com.elegantweather.com;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.elegantweather.com.gson.Forecast;
 import com.elegantweather.com.gson.Weather;
+import com.elegantweather.com.service.AutoUpdateService;
 import com.elegantweather.com.util.HttpUtil;
 import com.elegantweather.com.util.Utility;
 
@@ -289,7 +291,14 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        /*启动服务*/
+        if(weather !=null && "ok".equals(weather.status)){
+            Intent intent =new Intent(this, AutoUpdateService.class);
+            stopService(intent);
 
+        }else {
+            Toast.makeText(WeatherActivity.this,"获取天气信息失败",Toast.LENGTH_SHORT).show();
+        }
 
     }
 
